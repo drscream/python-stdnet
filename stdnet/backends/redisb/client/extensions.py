@@ -14,7 +14,7 @@ except ImportError:     # pragma    nocover
     from stdnet import ImproperlyConfigured
     raise ImproperlyConfigured('Redis backend requires redis python client')
 
-from redis.client import BasePipeline
+from redis.client import Pipeline
 
 RedisError = redis.RedisError
 p = os.path

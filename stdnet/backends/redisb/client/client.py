@@ -29,7 +29,7 @@ import io
 import socket
 from copy import copy
 
-from .extensions import RedisExtensionsMixin, redis, BasePipeline
+from .extensions import RedisExtensionsMixin, redis, Pipeline
 from .prefixed import PrefixedRedisMixin
 
 
@@ -59,7 +59,7 @@ class PrefixedRedis(PrefixedRedisMixin, Redis):
     pass
 
 
-class Pipeline(BasePipeline, Redis):
+class Pipeline(Pipeline, Redis):
 
     def __init__(self, client, transaction, shard_hint):
         self.client = client
