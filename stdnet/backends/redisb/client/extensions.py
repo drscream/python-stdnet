@@ -105,7 +105,7 @@ class RedisExtensionsMixin(object):
     )
 
     @property
-    def is_async(self):
+    def is_sdtasync(self):
         return False
 
     @property

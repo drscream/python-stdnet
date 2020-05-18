@@ -3,10 +3,10 @@ from collections import namedtuple
 from inspect import isgenerator
 
 try:
-    from pulsar import maybe_async as async
+    from pulsar import maybe_sdtasync as sdtasync
 except ImportError:     # pragma    noproxy
 
-    def async(gen):
+    def sdtasync(gen):
         raise NotImplementedError
 
 
@@ -27,7 +27,7 @@ __all__ = ['BackendStructure',
            'range_lookups',
            'getdb',
            'settings',
-           'async']
+           'sdtasync']
 
 
 query_result = namedtuple('query_result', 'key count')
@@ -273,8 +273,8 @@ from database.
         return struct(instance, self, client)
 
     def execute(self, result, callback=None):
-        if self.is_async():
-            result = async(result)
+        if self.is_sdtasync():
+            result = sdtasync(result)
             if callback:
                 return result.add_callback(callback)
             else:
@@ -285,8 +285,8 @@ from database.
             return callback(result) if callback else result
 
     # VIRTUAL METHODS
-    def is_async(self):
-        '''Check if the backend handler is asynchronous.'''
+    def is_sdtasync(self):
+        '''Check if the backend handler is sdtasynchronous.'''
         return False
 
     def setup_model(self, meta):

@@ -743,8 +743,8 @@ class BackendDataServer(stdnet.BackendDataServer):
     def auto_id_to_python(self, value):
         return int(value)
 
-    def is_async(self):
-        return self.client.is_async
+    def is_sdtasync(self):
+        return self.client.is_sdtasync
 
     def ping(self):
         return self.client.ping()

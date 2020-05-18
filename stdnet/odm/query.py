@@ -138,7 +138,7 @@ fields.
         pass
 
     def backend_query(self, **kwargs):
-        '''Build the :class:`stdnet.utils.async.BackendQuery` for this
+        '''Build the :class:`stdnet.utils.sdtasync.BackendQuery` for this
         instance.
 This is a virtual method with different implementation in :class:`Query`
 and :class:`QueryElement`.'''
@@ -619,7 +619,7 @@ list of ids deleted.'''
         return self.__construct
 
     def backend_query(self, **kwargs):
-        '''Build and return the :class:`stdnet.utils.async.BackendQuery`.
+        '''Build and return the :class:`stdnet.utils.sdtasync.BackendQuery`.
 This is a lazy method in the sense that it is evaluated once only and its
 result stored for future retrieval.'''
         q = self.construct()

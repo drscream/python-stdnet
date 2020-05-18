@@ -1,6 +1,6 @@
 from itertools import chain
 
-from stdnet import session_result, session_data, async
+from stdnet import session_result, session_data, sdtasync
 from stdnet.utils import itervalues, iteritems
 from stdnet.utils.structures import OrderedDict
 from stdnet.utils.exceptions import *
@@ -449,9 +449,9 @@ class Transaction(object):
             responses = []
             for backend, data in session.backends_data():
                 responses.append(backend.execute_session(data))
-                asy = asy or backend.is_async()
+                asy = asy or backend.is_sdtasync()
             if asy:
-                return async(self._async_commit(session, responses, callback))
+                return sdtasync(self._sdtasync_commit(session, responses, callback))
             for response in responses:
                 tuple(self._post_commit(session, response))
             return callback() if callback else True
@@ -496,7 +496,7 @@ class Transaction(object):
                 error = str(exceptions[0])
             raise CommitException(error, failures=nf)
 
-    def _async_commit(self, session, responses, callback):
+    def _sdtasync_commit(self, session, responses, callback):
         done = []
         try:
             for response in responses:

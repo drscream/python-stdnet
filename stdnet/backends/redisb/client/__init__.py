@@ -1,4 +1,4 @@
-async = None
+sdtasync = None
 
 from .extensions import (RedisScript, read_lua_file, redis, get_script,
                          RedisDb, RedisKey, RedisDataFormatter)
@@ -21,10 +21,10 @@ def redis_client(address=None, connection_pool=None, timeout=None,
     '''
     if not connection_pool:
         if timeout == 0:
-            if not async:
-                raise ImportError('Asynchronous connection requires async '
+            if not sdtasync:
+                raise ImportError('Asynchronous connection requires sdtasync '
                                   'bindings installed.')
-            return async.pool.redis(address, **kwargs)
+            return sdtasync.pool.redis(address, **kwargs)
         else:
             kwargs['socket_timeout'] = timeout
             return Redis(address[0], address[1], **kwargs)
